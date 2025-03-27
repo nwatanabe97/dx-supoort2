@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デジ推しフェス戦略インフォグラフィック</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;700&family=Yomogi&family=Zen+Kurenaido&display=swap');
+        
+        :root {
+            --fashion-1: #593C47;
+            --fashion-2: #F2E63D;
+            --fashion-3: #F2C53D;
+            --fashion-4: #F25C05;
+            --fashion-5: #F24405;
+            --text-dark: #334155;
+            --text-title: #1e40af;
+            --text-subtitle: #475569;
+            --bg-light: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Yomogi', cursive;
+            color: var(--text-dark);
+            background-color: #f8f9fa;
+            line-height: 1.4;
+            font-size: 14px;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 40px;
+        }
+        
+        .header {
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px dashed var(--fashion-3);
+            position: relative;
+        }
+        
+        .title-container {
+            flex: 1;
+        }
+        
+        .main-title {
+            font-family: 'Kaisei Decol', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, var(--fashion-1), var(--fashion-4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .main-title::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 6px;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='6' viewBox='0 0 100 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3C8.33333 1 16.6667 0 25 0C33.3333 0 41.6667 1 50 3C58.3333 5 66.6667 6 75 6C83.3333 6 91.6667 5 100 3' stroke='%23F25C05' stroke-width='2'/%3E%3C/svg%3E") repeat-x;
+            background-size: 100px 6px;
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .subtitle {
+            font-family: 'Zen Kurenaido', sans-serif;
+            font-size: 16px;
+            color: var(--text-subtitle);
+            margin-top: 16px;
+        }
+        
+        .date-info {
+            font-family: 'Zen Kurenaido', sans-serif;
+            font-size: 14px;
+            color: var(--text-subtitle);
+            text-align: right;
+            position: relative;
+            padding: 12px;
+            background-color: rgba(242, 230, 61, 0.15);
+            border-radius: 8px;
+            margin-left: 20px;
+        }
+        
+        .date-info::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10C30 5 70 5 90 10M10 90C30 95 70 95 90 90M10 10C5 30 5 70 10 90M90 10C95 30 95 70 90 90' stroke='%23F2C53D' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            opacity: 0.3;
+            z-index: -1;
+            border-radius: 8px;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        
+        .column {
+            width: 33.33%;
+            padding: 10px;
+        }
+        
+        @media (max-width: 900px) {
+            .column {
+                width: 50%;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
+        }
+        
+        .section-card {
+            background-color: var(--bg-light);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+        
+        .section-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20C60 10 140 10 180 20M20 180C60 190 140 190 180 180M20 20C10 60 10 140 20 180M180 20C190 60 190 140 180 180' stroke='%23593C47' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            opacity: 0.03;
+            z-index: -1;
+        }
+        
+        .section-header {
+            padding: 12px 16px;
+            border-bottom: 2px dashed rgba(89, 60, 71, 0.2);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-color: var(--fashion-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+        
+        .section-title {
+            font-family: 'Kaisei Decol', serif;
+            font-size: 18px;
+            color: var(--fashion-1);
+            font-weight: bold;
+            flex: 1;
+        }
+        
+        .section-content {
+            padding: 16px;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, var(--fashion-2) 60%);
+            display: inline;
+            padding: 0 2px;
+        }
+        
+        .marker {
+            position: relative;
+            display: inline;
+            z-index: 1;
+        }
+        
+        .marker::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 2px;
+            width: 100%;
+            height: 6px;
+            background-color: var(--fashion-3);
+            opacity: 0.4;
+            z-index: -1;
+        }
+        
+        .keyword {
+            font-weight: bold;
+            color: var(--fashion-5);
+        }
+        
+        .arrow-list {
+            list-style: none;
+            padding-left: 5px;
+        }
+        
+        .arrow-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .arrow-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--fashion-4);
+        }
+        
+        .bubble {
+            background-color: rgba(242, 197, 61, 0.15);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .bubble::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10C30 5 70 5 90 10M10 90C30 95 70 95 90 90M10 10C5 30 5 70 10 90M90 10C95 30 95 70 90 90' stroke='%23F2C53D' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            opacity: 0.3;
+            z-index: -1;
+            border-radius: 12px;
+        }
+        
+        .pillar-box {
+            border: 2px dashed var(--fashion-4);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+            position: relative;
+        }
+        
+        .pillar-number {
+            position: absolute;
+            top: -12px;
+            left: 10px;
+            background-color: var(--fashion-4);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .pillar-title {
+            font-family: 'Kaisei Decol', serif;
+            font-size: 16px;
+            color: var(--fashion-4);
+            margin-left: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .solution-box {
+            background-color: rgba(89, 60, 71, 0.05);
+            border-left: 4px solid var(--fashion-1);
+            border-radius: 4px;
+            padding: 10px;
+            margin: 8px 0;
+        }
+        
+        .solution-title {
+            font-weight: bold;
+            color: var(--fashion-1);
+            margin-bottom: 4px;
+        }
+        
+        .kpi-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .kpi-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--fashion-3);
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        
+        .hand-arrow {
+            display: block;
+            margin: 15px auto;
+            text-align: center;
+            font-size: 20px;
+            color: var(--fashion-4);
+            transform: rotate(90deg);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: var(--text-subtitle);
+            border-top: 2px dashed var(--fashion-3);
+            margin-top: 20px;
+        }
+        
+        .connector {
+            position: absolute;
+            border: 1px dashed var(--fashion-4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title-container">
+                <h1 class="main-title">「デジ推しフェス」戦略</h1>
+                <div class="subtitle">来場者200名達成を前提とした"質的成果"最大化とインパクト重視の運営計画</div>
+            </div>
+            <div class="date-info">
+                <p>宛先：深澤様（山梨県商工会連合会）</p>
+                <p>差出人：</p>
+                <p>日付：2025年3月26日</p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- 左列 -->
+            <div class="column">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">📋</div>
+                        <h2 class="section-title">エグゼクティブサマリー</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>本提案は、「デジ推しフェス」において、<span class="highlight">来場者数200名という高い目標達成を前提</span>とし、そのポテンシャルを最大限に活かしながら、<span class="marker">イベントの"質的成果"と戦略的インパクトを最大化</span>するための具体的な戦略と運営計画を示すものです。</p>
+                        
+                        <div class="bubble">
+                            <p><span class="keyword">核となる4つの視点：</span></p>
+                            <ul class="arrow-list">
+                                <li>集客規模（200名）に見合う質の高い参加者体験の提供</li>
+                                <li>参加者の具体的なDXアクションへの転換率向上</li>
+                                <li>県に対する事業成果の説得力強化（将来予算確保への貢献）</li>
+                                <li>大規模イベントを持続可能にするための運営最適化</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🔍</div>
+                        <h2 class="section-title">現状の課題認識と戦略的重要性</h2>
+                    </div>
+                    <div class="section-content">
+                        <ul class="arrow-list">
+                            <li><span class="marker">DX推進の起爆剤</span>としての位置づけ</li>
+                            <li><span class="marker">3年間の集大成の可視化</span>による成果アピール</li>
+                            <li><span class="marker">将来予算確保</span>への貢献</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🎯</div>
+                        <h2 class="section-title">戦略フレームワーク</h2>
+                    </div>
+                    <div class="section-content">
+                        <p style="text-align: center; font-weight: bold; margin-bottom: 15px;">「大規模集客 × "質"的インパクト最大化」</p>
+                        
+                        <div class="pillar-box">
+                            <div class="pillar-number">1</div>
+                            <div class="pillar-title">成功指標の進化</div>
+                            <p>200名達成の先にある"質"的KPIと戦略的レポーティング</p>
+                            
+                            <div class="solution-box">
+                                <div class="solution-title">課題</div>
+                                <p>200名という規模は大きな成功ですが、その<span class="highlight">参加者の熱量を具体的な成果に転換</span>するために「集客数」だけでは不十分</p>
+                            </div>
+                            
+                            <div class="solution-box">
+                                <div class="solution-title">解決策：KPIの重点化</div>
+                                <p>来場者数200名達成をベースラインとしつつ、<span class="marker">最重要KPIを「質的」指標に設定</span></p>
+                                
+                                <div style="margin-top: 8px;">
+                                    <p><span class="keyword">質的KPI例：</span></p>
+                                    <div class="kpi-item">
+                                        <div class="kpi-dot"></div>
+                                        <div>「DXへの意欲向上度」（5段階評価平均4.2以上目標）</div>
+                                    </div>
+                                    <div class="kpi-item">
+                                        <div class="kpi-dot"></div>
+                                        <div>「具体的なツール導入/専門家相談への意向」（目標40%）</div>
+                                    </div>
+                                    <div class="kpi-item">
+                                        <div class="kpi-dot"></div>
+                                        <div>「自社の課題と紐づけたネクストアクション計画」（目標30%）</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中央列 -->
+            <div class="column">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">2</div>
+                        <h2 class="section-title">エンゲージメント最大化</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>テーマの選択と集中 × 発見を促す導線設計</p>
+                        
+                        <div class="solution-box">
+                            <div class="solution-title">広報でのテーマ集中</div>
+                            <p>ターゲット業種ごとに<span class="highlight">最も訴求力の高いDXテーマに絞り込み</span>、具体的なメリットを強調</p>
+                        </div>
+                        
+                        <div class="solution-box">
+                            <div class="solution-title">会場でのゾーニング維持+「DX羅針盤シート」導入</div>
+                            <p>参加者が<span class="marker">自社の課題に最適なソリューションを発見</span>できる仕組み</p>
+                            <div style="text-align: center; margin: 10px 0;">
+                                <img src="/api/placeholder/140/110" alt="DX羅針盤シートイメージ" style="border-radius: 8px; border: 1px dashed var(--fashion-3);" />
+                            </div>
+                        </div>
+                        
+                        <div class="solution-box">
+                            <div class="solution-title">サイン計画強化</div>
+                            <p>200名規模でも<span class="highlight">迷わず自分に最適な体験</span>ができる会場設計</p>
+                        </div>
+                        
+                        <div style="margin-top: 15px; font-style: italic; font-size: 12px; border-left: 2px solid var(--fashion-3); padding-left: 10px;">
+                            <p>200名の多様な参加者一人ひとりの満足度を高め、「自分に関係がある」と感じてもらうためには、的を絞った広報と、会場内での効率的な自己発見プロセス（羅針盤シート）が不可欠です。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">3</div>
+                        <h2 class="section-title">運営オペレーション最適化</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>200名規模に対応する効率性と快適性の両立</p>
+                        
+                        <div class="solution-box">
+                            <div class="solution-title">課題</div>
+                            <p>来場者数200名規模となると、<span class="highlight">受付、会場案内、相談対応など、あらゆる場面でボトルネックが発生</span>しやすく、運営負荷の増大や参加者満足度の低下を招くリスク</p>
+                        </div>
+                        
+                        <div class="solution-box">
+                            <div class="solution-title">解決策</div>
+                            <div class="kpi-item">
+                                <div class="kpi-dot"></div>
+                                <div><span class="marker">セルフナビゲーションの徹底</span>：「DX羅針盤シート」、会場マップ、ブースサマリー表示、サイン計画を高度化</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-dot"></div>
+                                <div><span class="marker">「フロアサポーター」の戦略的配置</span>：専門知識不要のサポーターを複数名配置</div>
+                            </div>
+                            <ul style="margin-left: 20px; font-size: 12px;">
+                                <li>混雑緩和と動線整理</li>
+                                <li>羅針盤シート活用支援</li>
+                                <li>初歩的な質問への対応と適切なブース/情報デスクへの誘導</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bubble" style="margin-top: 15px;">
+                            <p><span class="keyword">正当性：</span>200名規模のイベントを円滑かつ高品質に運営するには、<span class="highlight">意図的に設計された効率的な仕組み</span>が不可欠です。これにより、〇〇様や専門スタッフは、より付加価値の高い対応（重要な来訪者対応、深い相談など）に集中できます。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">⚙️</div>
+                        <h2 class="section-title">実装に向けた主要アクション</h2>
+                    </div>
+                    <div class="section-content">
+                        <div style="position: relative; padding-left: 20px; border-left: 2px solid var(--fashion-3);">
+                            <div style="margin-bottom: 15px;">
+                                <div style="font-weight: bold; color: var(--fashion-1);">企画準備期（〜1週間前）</div>
+                                <ul style="list-style-type: none; padding-left: 10px;">
+                                    <li>✓ 「DX羅針盤シート」設計・制作</li>
+                                    <li>✓ ゾーニング・サイン計画の確定</li>
+                                    <li>✓ フロアサポーター確保と簡易研修</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <div style="font-weight: bold; color: var(--fashion-1);">直前準備（3日前〜前日）</div>
+                                <ul style="list-style-type: none; padding-left: 10px;">
+                                    <li>✓ サイン設置、動線確認</li>
+                                    <li>✓ スタッフへの最終説明会</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <div style="font-weight: bold; color: var(--fashion-1);">当日運営</div>
+                                <ul style="list-style-type: none; padding-left: 10px;">
+                                    <li>✓ セルフナビゲーション徹底</li>
+                                    <li>✓ フロアサポーター連携</li>
+                                    <li>✓ 質的KPI収集（アンケート）</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <div style="font-weight: bold; color: var(--fashion-1);">事後フォロー</div>
+                                <ul style="list-style-type: none; padding-left: 10px;">
+                                    <li>✓ 質的KPI集計・分析</li>
+                                    <li>✓ 単会との情報共有</li>
+                                    <li>✓ 質的成果を中心とした報告書作成</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右列 -->
+            <div class="column">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">4</div>
+                        <h2 class="section-title">持続的インパクト創出</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>イベント後の単会連携シームレス化</p>
+                        
+                        <div class="solution-box">
+                            <div class="solution-title">アンケートでのフォローアップ希望確認</div>
+                            <p><span class="highlight">具体的なDX関心分野と相談希望</span>を特定し、単会へつなぐ</p>
+                        </div>
+                        
+                        <div class="solution-box">
+                            <div class="solution-title">構造化された情報共有</div>
+                            <p>単会が<span class="marker">効率的にフォローアップ</span>できる情報設計</p>
+                        </div>
+                        
+                        <div class="solution-box">
+                            <div class="solution-title">連合会と単会の役割分担</div>
+                            <p>リード情報の<span class="marker">質に応じた適切な振り分け</span>と支援体制</p>
+                        </div>
+                        
+                        <div style="margin-top: 15px; font-style: italic; font-size: 12px; border-left: 2px solid var(--fashion-3); padding-left: 10px;">
+                            <p>200名の参加者の中から生まれるであろう<span class="highlight">多数のDX推進の「芽」</span>を確実に育て、具体的な成果に繋げるためには、イベント後のフォローアップ体制が生命線となります。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">⚠️</div>
+                        <h2 class="section-title">想定されるリスクと対応策</h2>
+                    </div>
+                    <div class="section-content">
+                        <div style="margin-bottom: 15px;">
+                            <p><span class="keyword">リスク１：</span>セルフナビゲーションが機能せず、200名規模で混乱が発生する</p>
+                            <div style="background-color: rgba(242, 92, 5, 0.1); padding: 8px; border-radius: 6px; margin-top: 4px;">
+                                <p><span style="font-weight: bold;">対応策：</span>ユーザーテスト、動線シミュレーション、サイン検証、フロアサポーター配置と役割明確化・簡易研修の徹底</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <p><span class="keyword">リスク２：</span>（集客は達成前提とし）質的KPIが目標に届かない</p>
+                            <div style="background-color: rgba(242, 92, 5, 0.1); padding: 8px; border-radius: 6px; margin-top: 4px;">
+                                <p><span style="font-weight: bold;">対応策：</span>羅針盤シートとブースコンテンツの連動性を高め、参加者の課題解決に直結する体験を提供。アンケート設問を工夫し、行動意欲を引き出す</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <p><span class="keyword">リスク３：</span>単会でのフォローアップが多数のリードに対応しきれない</p>
+                            <div style="background-color: rgba(242, 92, 5, 0.1); padding: 8px; border-radius: 6px; margin-top: 4px;">
+                                <p><span style="font-weight: bold;">対応策：</span>シンプルな情報共有と手順明確化、単会向けのフォローアップ優先順位付けガイドライン提供、必要に応じて連合会からの初期サポート</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <p><span class="keyword">リスク４：</span>運営リソースが200名規模に対して不足する</p>
+                            <div style="background-color: rgba(242, 92, 5, 0.1); padding: 8px; border-radius: 6px; margin-top: 4px;">
+                                <p><span style="font-weight: bold;">対応策：</span>フロアサポーターの人員確保（必要数の再見積もり）。各タスクの担当明確化と事前準備の徹底。外部協力（ボランティア等）も視野に</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🏁</div>
+                        <h2 class="section-title">結論：200名達成の勢いを、確かな成果へ</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>来場者数200名という目標達成への自信は、本イベント成功への大きな推進力です。本提案は、その勢いを最大限に活かし、単なる「賑わい」に留まらない<span class="marker">「質の高い成果」</span>へと昇華させるための戦略と具体的な実行計画です。</p>
+                        
+                        <div class="bubble" style="margin-top: 15px;">
+                            <p>運営負荷を最適化しつつ、参加者満足度を高め、県への力強い成果報告を実現することで、〇〇様のリーダーシップの下、本イベントを<span class="highlight">歴史的な成功</span>へと導くことができると確信しております。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>出典：「デジ推しフェス」戦略提案書（2025年3月26日）</p>
+        </div>
+    </div>
+</body>
+</html>
